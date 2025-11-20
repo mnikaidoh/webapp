@@ -63,7 +63,7 @@
               <a class="nav-link" href="info.html">info </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html"
+              <a class="nav-link active" href="contact.html"
                 >contact <span class="sr-only"></span
               ></a>
             </li>
@@ -75,7 +75,7 @@
       </nav>
     </header>
     <main>
-      <div
+        <div
         class="hero-image"
         style="
           background-image: linear-gradient(
@@ -86,25 +86,69 @@
         "
       >
         <div class="hero-text">
-          <h1>Find Career Services Near You</h1>
-          <h2>Search for resources that fit your needs.</h2>
+          <h1>Contact Information</h1>
         </div>
-      </div>
-      <!--set up airtable base here... how -->
-
-      <section class="cardsChart">
-        <div class="card">
-          <img src="./images/sfdither.png" class="card-img-top" alt="loc1" />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </section>
+        <form
+              class="col-7"
+              class="contactForm"
+              action="https://api.web3forms.com/submit"
+              method="POST"
+              id="contactForm"
+            >
+              <input
+                type="hidden"
+                name="access_key"
+                value="fa328218-5b57-4770-a55a-db8fdec05057"
+              />
+              <input
+                type="hidden"
+                name="from_name"
+                value="Web3Forms Submission"
+              />
+              <div class="row">
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="First Name"
+                    placeholder="First name"
+                    required
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="Last Name"
+                    placeholder="Last name"
+                  />
+                </div>
+              </div>
+              <br />
+              <div class="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  id="exampleFormControlInput1"
+                  placeholder="email@example.com"
+                />
+              </div>
+              <div class="form-group">
+                <label for="myTextarea">Your Message:</label>
+                <textarea
+                  class="form-control"
+                  name="message"
+                  id="myTextarea"
+                  rows="5"
+                  placeholder="Enter your message here..."
+                  required
+                ></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit">
+                Send Message
+              </button>
+            </form>
     </main>
   </body>
 </html>
