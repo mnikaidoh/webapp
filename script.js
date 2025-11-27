@@ -19,9 +19,8 @@ async function getAllRecords() {
     .then((data) => {
       console.log(data); // response is an object w/ .records array
 
-      //getResultElement.innerHTML = ""; // clear brews
-
       /*
+      getResultElement.innerHTML = ""; // clear brews
       let newHtml = "";
 
       for (let i = 0; i < data.records.length; i++) {
