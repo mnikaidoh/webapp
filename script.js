@@ -2,7 +2,7 @@
 
 // function for our list view
 async function getAllRecords() {
-  let getResultElement = document.getElementById("brews");
+  let getResultElement = document.getElementById("service");
 
   const options = {
     method: "GET",
@@ -19,7 +19,6 @@ async function getAllRecords() {
     .then((data) => {
       console.log(data); // response is an object w/ .records array
 
-      /*
       getResultElement.innerHTML = ""; // clear brews
       let newHtml = "";
 
@@ -31,7 +30,7 @@ async function getAllRecords() {
          <div class="col-xl-4 cardImageText">
           <div class="card list move border-dark mb-5" style="width: 20rem;">
           
-          <a href="breweries.html?id=${data.records[i].id}">${
+          <a href="index.html?id=${data.records[i].id}">${
           logo
             ? `<img class="card-img-top rounded" alt="${name}" src="${logo[0].url}">`
             : ``
@@ -46,8 +45,7 @@ async function getAllRecords() {
         `;
       }
 
-
-      getResultElement.innerHTML = newHtml;*/
+      getResultElement.innerHTML = newHtml;
     });
 }
 
