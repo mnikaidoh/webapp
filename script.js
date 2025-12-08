@@ -1,5 +1,7 @@
 "use strict";
 
+let allItems = [];
+
 // function for our list view
 async function getAllRecords() {
   let getResultElement = document.getElementById("service");
@@ -16,6 +18,8 @@ async function getAllRecords() {
     options
   )
     .then((response) => response.json()) //whatever server returns, convert to json
+
+    /*
     .then((data) => {
       console.log(data); // response is an object w/ .records array
 
@@ -47,11 +51,66 @@ async function getAllRecords() {
 
       getResultElement.innerHTML = newHtml;
     });
+    */
+    .then((data) => {
+      console.log(data);
+
+      // 🎯 SAVE Airtable data into allItems for filtering later
+      allItems = data.records.map((record) => ({
+        id: record.id,
+        name: record.fields["name"],
+        description: record.fields["description"],
+        image: record.fields["image"] || "",
+        servicesOffered: record.fields["servicesOffered"],
+        ages: record.fields["ages"], // array
+        days: record.fields["days"], // array
+        location: record.fields["location"], // in-person / online
+      }));
+
+      // 🎯 Show all items on first load
+      renderItems(allItems);
+    });
+}
+function renderItems(items) {
+  const container = document.getElementById("service");
+  container.innerHTML = "";
+
+  let html = "";
+  //<a href="index.html?id=${item.id}" class="btn btn-primary">More Info</a>
+  items.forEach((item) => {
+    html += `
+      <section class="cardsChart">
+        <div class="card">
+          <img src="${item.image}" class="card-img-top" alt="location" />
+          <div class="card-body">
+            <h5 class="card-title">${item.name}</h5>
+            <p class="card-text">${item.description}</p>
+            
+            <button class="btn btn-primary" onclick="getOneRecord('${item.id}')">More Info</button>
+
+          </div>
+        </div>
+      </section>
+    `;
+  });
+
+  container.innerHTML = html;
 }
 
 //
 //string interpolation w the backtick. subsitute w ${}.
+
+/*
+function hidePageSections() {
+  const hero = document.getElementById("hero-image");
+  const filters = document.getElementById("filter-bar");
+
+  if (hero) hero.style.display = "none";
+  if (filters) filters.style.display = "none";
+}*/
+
 async function getOneRecord(id) {
+  //hidePageSections();
   let getResultElement = document.getElementById("service"); //returns html element object. service is my ID name...
   const options = {
     method: "GET",
@@ -59,10 +118,16 @@ async function getOneRecord(id) {
       Authorization: `Bearer patwYPMVbfZ6KtqFr.88b5fccc3404d05f5eb094ee392b6b484aa088a09a7113df9c856d2928369720`,
     },
   };
+  /*
   await fetch(
     `https://api.airtable.com/v0/appJoz0hlIKKwFPOk/Table%201`,
     options
-  )
+  )*/
+
+  await fetch(
+    `https://api.airtable.com/v0/appJoz0hlIKKwFPOk/Table%201/${id}`,
+    options
+  ) /*
     .then((response) => response.json())
     .then((data) => {
       console.log(data); // response is a single object
@@ -121,7 +186,7 @@ async function getOneRecord(id) {
   </div>
   <div class="card list hours">
     <div class="card-body">
-      <h4 class="card-title">😁 🕔 Happy Hours</h4>
+      <h4 class="card-title">Age groups served</h4>
       <p class="card-text">${ages}</p>
      
     </div>
@@ -131,11 +196,11 @@ async function getOneRecord(id) {
 <table class="table misc">
     <tbody>
     <tr>
-      <th scope="row misc">Neighborhood</th>
+      <th scope="row misc">Days Open</th>
       <td class="card-text">${days}</td>
     </tr>
     <tr>
-      <th scope="row misc">Outdoor Seating</th>
+      <th scope="row misc">Open after 5pm?</th>
       <td>${afterFive}</td>
     </tr>
     <tr>
@@ -143,12 +208,12 @@ async function getOneRecord(id) {
       <td colspan="2">${location}</td>
     </tr>
      <tr>
-      <th scope="row misc">Merchandise</th>
+      <th scope="row misc">Phone Number</th>
       <td colspan="2">${phone}</td>
     </tr>
     <tr>
       <th scope="row misc">Links</th>
-      <td colspan="2"><a href="${website}" target="_blank"><button type="button" class="btn btn-primary btn-sm go">Website</button></a> <a href="${yelp}" target="_blank"><button type="button" class="btn btn-primary btn-sm go">Yelp</button></a></td>
+      <td colspan="2"><a href="${website}" target="_blank"><button type="button" class="btn btn-primary btn-sm go">Website</button></a> </td>
     </tr>
   </tbody>
 </table>
@@ -157,6 +222,80 @@ async function getOneRecord(id) {
 </div>
 </div>
 </div>
+      `;
+
+      getResultElement.innerHTML = newHtml;
+    });
+}*/
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+
+      const image = data.fields["image"] ? data.fields["image"][0].url : "";
+      const name = data.fields["name"] || "";
+      const description = data.fields["description"] || "";
+      const servicesOffered = data.fields["servicesOffered"] || "";
+      const ages = data.fields["ages"] || "";
+      const days = data.fields["days"] || "";
+      const afterFive = data.fields["afterFive"] || "";
+      const location = data.fields["location"] || "";
+      const address = data.fields["address"] || "";
+      const website = data.fields["website"] || "";
+      const phone = data.fields["phone"] || "";
+      const hours = data.fields["hours"] || "";
+      const map = data.fields["map"] || "#";
+
+      const newHtml = `
+        <div class="card mb-3">
+          <div class="row g-0">
+            ${
+              image
+                ? `<div class="col-md-4"><img src="${image}" class="img-fluid rounded-start" alt="${name}"></div>`
+                : ""
+            }
+            <div class="col-md-8">
+              <div class="card-body">
+                <h3 class="card-title">${name}</h3>
+                <p class="card-text">${description}</p>
+                <p class="card-text"><strong>Services Offered:</strong> ${servicesOffered}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4>Location & Directions</h4>
+            <p><strong>Address:</strong> ${address}</p>
+            <a href="${map}" target="_blank" class="btn btn-primary btn-sm">Get Directions</a>
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4>Schedule & Details</h4>
+            <p><strong>Hours:</strong> ${hours}</p>
+            <p><strong>Age Groups Served:</strong> ${ages}</p>
+            <p><strong>Days Open:</strong> ${days}</p>
+            <p><strong>Open after 5pm:</strong> ${afterFive}</p>
+            <p><strong>Food Served:</strong> ${location}</p>
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4>Contact & Links</h4>
+            <p><strong>Phone:</strong> ${phone}</p>
+            ${
+              website
+                ? `<a href="${website}" target="_blank" class="btn btn-primary btn-sm">Website</a>`
+                : ""
+            }
+          </div>
+        </div>
+        <div class="card mb-3">
+          <button class="btn btn-secondary" onclick="getAllRecords()">Back to List</button>
+        </div>
       `;
 
       getResultElement.innerHTML = newHtml;
@@ -226,4 +365,78 @@ document.addEventListener("DOMContentLoaded", () => {
     // When the body is clicked, remove the "show" class from the navbar collapse element
     navbarCollapse.classList.remove("show");
   });
+});
+
+//testing this out rn, trying to use this to filter my stuff.
+document.getElementById("applyFilters").addEventListener("click", () => {
+  // Get checked values from each group
+  const services = [
+    ...document.querySelectorAll(".filter-service:checked"),
+  ].map((cb) => cb.value);
+  const ages = [...document.querySelectorAll(".filter-age:checked")].map(
+    (cb) => cb.value
+  );
+  const days = [...document.querySelectorAll(".filter-days:checked")].map(
+    (cb) => cb.value
+  );
+  const formats = [...document.querySelectorAll(".filter-format:checked")].map(
+    (cb) => cb.value
+  );
+
+  let filtered = allItems;
+
+  // Services filter
+  if (services.length) {
+    filtered = filtered.filter(
+      (item) =>
+        item.servicesOffered &&
+        item.servicesOffered.some((service) => services.includes(service))
+    );
+  }
+
+  // Age group filter (item may have multiple age groups)
+  /*
+  if (ages.length) {
+    filtered = filtered.filter(
+      (item) =>
+        //item.AgeGroup && item.AgeGroup.some((age) => ages.includes(ages))
+        item.ages && item.ages.some((age) => ages.includes(age))
+    );
+  }
+    */
+  if (ages.length) {
+    filtered = filtered.filter((item) =>
+      item.ages.some((age) => ages.includes(age))
+    );
+  }
+
+  // Days open filter (item may have multiple days)
+  //THIS DOES NOT INCLUDE AFTERFIVE BTW!!
+  if (days.length) {
+    filtered = filtered.filter(
+      (item) =>
+        //item.DaysOpen && item.DaysOpen.some((day) => days.includes(days))
+        item.days && item.days.some((day) => days.includes(day))
+    );
+  }
+
+  // Format filter (simple string) in-person or online
+  /*
+  if (formats.length) {
+    filtered = filtered.filter((item) => formats.includes(item.location));
+  }
+  if (formats.length) {
+    filtered = filtered.filter(
+      (item) => item.location && formats.includes(item.location)
+    );
+  }*/
+  //this doesnt work...
+  if (formats.length) {
+    filtered = filtered.filter((item) =>
+      formats.includes(item.location.trim())
+    );
+  }
+
+  // Re-render results
+  renderItems(filtered);
 });

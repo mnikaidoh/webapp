@@ -88,13 +88,123 @@
           <h2>Search for resources that fit your needs.</h2>
         </div>
       </div>
-      <!--set up airtable base here... how ...-->
+
+      <div class="filter-bar">
+        <!-- Services Offered -->
+        <div class="filter-group">
+          <h3>Services</h3>
+          <label
+            ><input
+              type="checkbox"
+              class="filter-service"
+              value="Paid services"
+            />
+            Paid Services</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="filter-service"
+              value="Free services"
+            />
+            Free Services</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="filter-service"
+              value="Resume reviews"
+            />
+            Resume Reviews</label
+          >
+          <label
+            ><input type="checkbox" class="filter-service" value="Coaching" />
+            Coaching</label
+          >
+          <label
+            ><input type="checkbox" class="filter-service" value="Workshops" />
+            Workshops</label
+          >
+        </div>
+
+        <!-- Age Groups -->
+        <div class="filter-group">
+          <h3>Age Group</h3>
+          <label
+            ><input type="checkbox" class="filter-age" value="Youth" />
+            Youth</label
+          >
+          <label
+            ><input type="checkbox" class="filter-age" value="Adults" />
+            Adult</label
+          >
+          <label
+            ><input type="checkbox" class="filter-age" value="Seniors" />
+            Senior</label
+          >
+        </div>
+
+        <!-- Days of Week -->
+        <div class="filter-group">
+          <h3>Days Open</h3>
+          <label
+            ><input type="checkbox" class="filter-days" value="Monday" />
+            Monday</label
+          >
+          <label
+            ><input type="checkbox" class="filter-days" value="Tuesday" />
+            Tuesday</label
+          >
+          <label
+            ><input type="checkbox" class="filter-days" value="Wednesday" />
+            Wednesday</label
+          >
+          <label
+            ><input type="checkbox" class="filter-days" value="Thursday" />
+            Thursday</label
+          >
+          <label
+            ><input type="checkbox" class="filter-days" value="Friday" />
+            Friday</label
+          >
+          <label
+            ><input type="checkbox" class="filter-days" value="Saturday" />
+            Saturday</label
+          >
+          <label
+            ><input type="checkbox" class="filter-days" value="Sunday" />
+            Sunday</label
+          >
+          <label
+            ><input type="checkbox" class="filter-days" value="Yes" /> Open
+            after 5pm</label
+          >
+        </div>
+
+        <!-- Format -->
+        <div class="filter-group">
+          <h3>Format</h3>
+          <label
+            ><input type="checkbox" class="filter-format" value="In-person" />
+            In-person</label
+          >
+          <label
+            ><input type="checkbox" class="filter-format" value="Online" />
+            Online</label
+          >
+        </div>
+      </div>
+      <div class="d-grid gap-2 col-5 mx-auto">
+        <button class="btn btn-secondary w-100" id="applyFilters">
+          Apply Filters
+        </button>
+      </div>
 
       <div class="container-fluid tables">
         <div class="row g-3" id="service"></div>
       </div>
       <!-- import the Bootstrap's javascript file -->
-<!--
+      <!--
       <section class="cardsChart">
         <div class="card">
           <img src="./images/sfdither.png" class="card-img-top" alt="loc1" />
@@ -108,8 +218,7 @@
           </div>
         </div>
       </section>
-    -->
-    </main>
+    --></main>
     <script src="script.js"></script>
   </body>
 </html>
