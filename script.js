@@ -30,11 +30,12 @@ async function getAllRecords() {
         let name = data.records[i].fields["name"]; // here we are getting column values,,, here we are using the Field ID to fecth the name property
         let description = data.records[i].fields["description"];
         let image = data.records[i].fields["image"];
+        let alt = data.records[i].fields["alt"];
 
         newHtml += `
         <section class="cardsChart">
           <div class="card">
-          <img src="${image}" class="card-img-top" alt="location" />
+          <img src="${image}" class="card-img-top" alt="${alt}" />
           </a>
           <div class="card-body">
             <h5 class="card-title">${name}</h5>
