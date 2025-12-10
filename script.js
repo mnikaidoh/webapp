@@ -253,6 +253,7 @@ async function getOneRecord(id) {
                 <h3 class="card-title">${name}</h3>
                 <p class="card-text">${description}</p>
                 <p class="card-text"><strong>Services Offered:</strong> ${servicesOffered}</p>
+                <p><strong>Address:</strong> ${address}</p>
               </div>
             </div>
           </div>
@@ -260,13 +261,7 @@ async function getOneRecord(id) {
         
         <div class="container">
           <div class="row g-0">
-            <div class="container">
-              <div class="card-body">
-                <h4>Location & Directions</h4>
-                <p><strong>Address:</strong> ${address}</p>
-                <a href="${map}" target="_blank" class="btn btn-primary btn-sm">Get Directions</a>
-              </div>
-            </div>
+
             <div class="container">
               <div class="card-body">
                 <h4>Schedule & Details</h4>
