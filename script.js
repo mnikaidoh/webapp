@@ -237,6 +237,7 @@ async function getOneRecord(id) {
       const address = data.fields["address"] || "";
       const website = data.fields["website"] || "";
       const phone = data.fields["phone"] || "";
+      const email = data.fields["email"] || "";
       const hours = data.fields["hours"] || "";
       const map = data.fields["map"] || "#";
 
