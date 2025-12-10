@@ -264,17 +264,14 @@ async function getOneRecord(id) {
 
             <div class="container">
               <div class="card-body">
-                <h4>Schedule & Details</h4>
+                <h4>Details</h4>
                 <p><strong>Hours:</strong> ${hours}</p>
                 <p><strong>Age Groups Served:</strong> ${ages}</p>
-                
-                <p><strong>Open after 5pm:</strong> ${afterFive}</p>
-                <p><strong>Format:</strong> ${location}</p>
               </div>
             </div>
             <div class="container">
               <div class="card-body">
-                <h4>Contact & Links</h4>
+                <h4>Contact & Link</h4>
                 <p><strong>Phone:</strong> ${phone}</p>
                 ${
                   website
