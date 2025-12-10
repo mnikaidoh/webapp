@@ -273,6 +273,7 @@ async function getOneRecord(id) {
               <div class="card-body">
                 <h4>Contact & Link</h4>
                 <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Email:</strong> ${email}</p>
                 ${
                   website
                     ? `<a href="${website}" target="_blank" class="btn btn-primary btn-sm">Website</a>`
