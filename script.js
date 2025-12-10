@@ -68,7 +68,6 @@ async function getAllRecords() {
         location: record.fields["location"], // in-person / online
       }));
 
-      // 🎯 Show all items on first load
       renderItems(allItems);
     });
 }
@@ -81,8 +80,8 @@ function renderItems(items) {
   items.forEach((item) => {
     html += `
       <section class="cardsChart">
-        <div class="card">
-          <img src="${item.image}" class="card-img-top" alt="location" />
+        <div class="card lift">
+          <img src="${item.image}" class="card-img-top" alt="${item.alt}" />
           <div class="card-body">
             <h5 class="card-title">${item.name}</h5>
             <p class="card-text">${item.description}</p>
@@ -101,17 +100,17 @@ function renderItems(items) {
 //
 //string interpolation w the backtick. subsitute w ${}.
 
-/*
 function hidePageSections() {
-  const hero = document.getElementById("hero-image");
+  //this does not work...
+  //const hero = document.getElementById("hero-image");
   const filters = document.getElementById("filter-bar");
 
-  if (hero) hero.style.display = "none";
+  //if (hero) hero.style.display = "none";
   if (filters) filters.style.display = "none";
-}*/
+}
 
 async function getOneRecord(id) {
-  //hidePageSections();
+  hidePageSections();
   let getResultElement = document.getElementById("service"); //returns html element object. service is my ID name...
   const options = {
     method: "GET",
@@ -119,11 +118,6 @@ async function getOneRecord(id) {
       Authorization: `Bearer patwYPMVbfZ6KtqFr.88b5fccc3404d05f5eb094ee392b6b484aa088a09a7113df9c856d2928369720`,
     },
   };
-  /*
-  await fetch(
-    `https://api.airtable.com/v0/appJoz0hlIKKwFPOk/Table%201`,
-    options
-  )*/
 
   await fetch(
     `https://api.airtable.com/v0/appJoz0hlIKKwFPOk/Table%201/${id}`,
@@ -232,7 +226,7 @@ async function getOneRecord(id) {
     .then((data) => {
       console.log(data);
 
-      const image = data.fields["image"] ? data.fields["image"][0].url : "";
+      const image = data.fields["image"] || "";
       const name = data.fields["name"] || "";
       const description = data.fields["description"] || "";
       const servicesOffered = data.fields["servicesOffered"] || "";
@@ -247,7 +241,7 @@ async function getOneRecord(id) {
       const map = data.fields["map"] || "#";
 
       const newHtml = `
-        <div class="card mb-3">
+        <div class="container">
           <div class="row g-0">
             ${
               image
@@ -263,38 +257,44 @@ async function getOneRecord(id) {
             </div>
           </div>
         </div>
+        
+        <div class="container">
+          <div class="row g-0">
+            <div class="container">
+              <div class="card-body">
+                <h4>Location & Directions</h4>
+                <p><strong>Address:</strong> ${address}</p>
+                <a href="${map}" target="_blank" class="btn btn-primary btn-sm">Get Directions</a>
+              </div>
+            </div>
+            <div class="container">
+              <div class="card-body">
+                <h4>Schedule & Details</h4>
+                <p><strong>Hours:</strong> ${hours}</p>
+                <p><strong>Age Groups Served:</strong> ${ages}</p>
+                <p><strong>Days Open:</strong> ${days}</p>
+                <p><strong>Open after 5pm:</strong> ${afterFive}</p>
+                <p><strong>Format:</strong> ${location}</p>
+              </div>
+            </div>
+            <div class="container">
+              <div class="card-body">
+                <h4>Contact & Links</h4>
+                <p><strong>Phone:</strong> ${phone}</p>
+                ${
+                  website
+                    ? `<a href="${website}" target="_blank" class="btn btn-primary btn-sm">Website</a>`
+                    : ""
+                }
+              </div>
 
-        <div class="card mb-3">
-          <div class="card-body">
-            <h4>Location & Directions</h4>
-            <p><strong>Address:</strong> ${address}</p>
-            <a href="${map}" target="_blank" class="btn btn-primary btn-sm">Get Directions</a>
+            </div>
+
           </div>
         </div>
 
-        <div class="card mb-3">
-          <div class="card-body">
-            <h4>Schedule & Details</h4>
-            <p><strong>Hours:</strong> ${hours}</p>
-            <p><strong>Age Groups Served:</strong> ${ages}</p>
-            <p><strong>Days Open:</strong> ${days}</p>
-            <p><strong>Open after 5pm:</strong> ${afterFive}</p>
-            <p><strong>Food Served:</strong> ${location}</p>
-          </div>
-        </div>
 
-        <div class="card mb-3">
-          <div class="card-body">
-            <h4>Contact & Links</h4>
-            <p><strong>Phone:</strong> ${phone}</p>
-            ${
-              website
-                ? `<a href="${website}" target="_blank" class="btn btn-primary btn-sm">Website</a>`
-                : ""
-            }
-          </div>
-        </div>
-        <div class="card mb-3">
+        <div class="container">
           <button class="btn btn-secondary" onclick="getAllRecords()">Back to List</button>
         </div>
       `;

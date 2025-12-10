@@ -91,4 +91,18 @@ h2 {
 .card {
   width: 18rem;
   background-color: aliceblue;
+  height: 30rem;
+
+  position: relative; /* Important for z-index if needed for overlapping */
+  transition: all 0.3s ease-in-out; /* Smooth transition for all changes */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Initial subtle shadow */
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enlarges shadow for a more pronounced lift */
+  transform: translateY(-5px) scale(1.02);
+}
+
+.card-img-top {
+  max-height: 9rem;
 }
