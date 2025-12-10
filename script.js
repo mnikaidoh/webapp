@@ -138,7 +138,7 @@ async function getOneRecord(id) {
       let address = data.fields["address"];
       let website = data.fields["website"];
       let phone = data.fields["phone"];
-      let email = data.fields["email"];
+      let email = data.fields["email"]; //this for some reason is a line not being added to js...
       let hours = data.fields["hours"];
       let map = data.fields["map"]; //yet to be used, not a field in airtable yet
 
