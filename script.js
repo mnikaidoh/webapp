@@ -272,7 +272,7 @@ async function getOneRecord(id) {
                 <h4>Schedule & Details</h4>
                 <p><strong>Hours:</strong> ${hours}</p>
                 <p><strong>Age Groups Served:</strong> ${ages}</p>
-                <p><strong>Days Open:</strong> ${days}</p>
+                
                 <p><strong>Open after 5pm:</strong> ${afterFive}</p>
                 <p><strong>Format:</strong> ${location}</p>
               </div>
