@@ -19,40 +19,6 @@ async function getAllRecords() {
   )
     .then((response) => response.json()) //whatever server returns, convert to json
 
-    /*
-    .then((data) => {
-      console.log(data); // response is an object w/ .records array
-
-      getResultElement.innerHTML = ""; // clear brews
-      let newHtml = "";
-
-      for (let i = 0; i < data.records.length; i++) {
-        let name = data.records[i].fields["name"]; // here we are getting column values,,, here we are using the Field ID to fecth the name property
-        let description = data.records[i].fields["description"];
-        let image = data.records[i].fields["image"];
-        let alt = data.records[i].fields["alt"];
-
-        newHtml += `
-        <section class="cardsChart">
-          <div class="card">
-          <img src="${image}" class="card-img-top" alt="${alt}" />
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">${name}</h5>
-            <p class="card-text">
-              ${description}
-            </p>
-            <a href="index.html?id=${data.records[i].id}" class="btn btn-primary">More Info</a>
-          </div>
-        </div>
-      </section>
-        
-        `;
-      }
-
-      getResultElement.innerHTML = newHtml;
-    });
-    */
     .then((data) => {
       console.log(data);
 
@@ -122,106 +88,7 @@ async function getOneRecord(id) {
   await fetch(
     `https://api.airtable.com/v0/appJoz0hlIKKwFPOk/Table%201/${id}`,
     options
-  ) /*
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data); // response is a single object
-
-      let image = data.fields["image"];
-      let name = data.fields["name"];
-      let servicesOffered = data.fields["servicesOffered"];
-      let ages = data.fields["ages"];
-      let days = data.fields["days"];
-      let description = data.fields["description"];
-      let afterFive = data.fields["afterFive"];
-      let location = data.fields["location"]; //in person or online format
-      let address = data.fields["address"];
-      let website = data.fields["website"];
-      let phone = data.fields["phone"];
-      let email = data.fields["email"]; //this for some reason is a line not being added to js...
-      let hours = data.fields["hours"];
-      let map = data.fields["map"]; //yet to be used, not a field in airtable yet
-
-      let newHtml = `
-        <div class="card list mb-3">
-        <div class="row g-0">
-        <div class="col-md-4 d-flex justify-content-center align-items-center">
-     ${
-       image
-         ? `<img class="img-fluid back ms-4" alt="${name}" src="${image[0].url}">`
-         : ``
-     }
-    </div>
-    <div class="col-md-6 d-flex justify-content-center align-items-center desc">
-      <div class="card-body">
-        <h5 class="card-title bar">${name}</h5>
-        <p class="card-text">${description}</p>
-        <p class="card-text"><small>${servicesOffered}</small></p>
-        <p class="card-text"><small>${address}</small></p>
-        <a href="${map}" target="_blank"><button type="button" class="btn btn-primary btn-sm">Get Directions</button></a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card list mb-3">
-  <div class="row g-0">
-    <div class="col-md-4 d-flex justify-content-center ">
-    ${image ? `<img class="img-fluid front" alt="${name}" src="${image}">` : ``}
-       </div>
-       <div class="col-md-6 d-flex justify-content-center align-items-center">
-       <div class="card-body">
-       <div class="card-group hours mx-auto">    
-  <div class="card list hours shift">
-    <div class="card-body">
-      <h4 class="card-title">🕔 Hours</h4>
-      <p class="card-text">${hours}</p>
-      
-    </div>
-  </div>
-  <div class="card list hours">
-    <div class="card-body">
-      <h4 class="card-title">Age groups served</h4>
-      <p class="card-text">${ages}</p>
-     
-    </div>
-  </div>
-</div>
-<div class="moves">
-<table class="table misc">
-    <tbody>
-    <tr>
-      <th scope="row misc">Days Open</th>
-      <td class="card-text">${days}</td>
-    </tr>
-    <tr>
-      <th scope="row misc">Open after 5pm?</th>
-      <td>${afterFive}</td>
-    </tr>
-    <tr>
-      <th scope="row misc">Food Served</th>
-      <td colspan="2">${location}</td>
-    </tr>
-     <tr>
-      <th scope="row misc">Phone Number</th>
-      <td colspan="2">${phone}</td>
-    </tr>
-    <tr>
-      <th scope="row misc">Links</th>
-      <td colspan="2"><a href="${website}" target="_blank"><button type="button" class="btn btn-primary btn-sm go">Website</button></a> </td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-      `;
-
-      getResultElement.innerHTML = newHtml;
-    });
-}*/
+  )
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
@@ -389,24 +256,14 @@ document.getElementById("applyFilters").addEventListener("click", () => {
     );
   }
 
-  // Age group filter (item may have multiple age groups)
-  /*
-  if (ages.length) {
-    filtered = filtered.filter(
-      (item) =>
-        //item.AgeGroup && item.AgeGroup.some((age) => ages.includes(ages))
-        item.ages && item.ages.some((age) => ages.includes(age))
-    );
-  }
-    */
+  // Age group filter
   if (ages.length) {
     filtered = filtered.filter((item) =>
       item.ages.some((age) => ages.includes(age))
     );
   }
 
-  // Days open filter (item may have multiple days)
-  //THIS DOES NOT INCLUDE AFTERFIVE BTW!!
+  // Days open filter
   if (days.length) {
     filtered = filtered.filter(
       (item) =>
@@ -416,15 +273,6 @@ document.getElementById("applyFilters").addEventListener("click", () => {
   }
 
   // Format filter (simple string) in-person or online
-  /*
-  if (formats.length) {
-    filtered = filtered.filter((item) => formats.includes(item.location));
-  }
-  if (formats.length) {
-    filtered = filtered.filter(
-      (item) => item.location && formats.includes(item.location)
-    );
-  }*/
   //this doesnt work...
   if (formats.length) {
     filtered = filtered.filter((item) =>
