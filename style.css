@@ -17,14 +17,7 @@ h2 {
   font-size: 1.5rem;
   font-weight: normal;
 }
-.container {
-  /*I M NOT USING THIS RN
-  EDIT THIS,, ITS RUINING MY FOOTER*/
-  /*background-color: #EEE9CA;
-  display: flex;
-  justify-content: center;
-  */
-}
+
 /* The hero image */
 .hero-image {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
@@ -79,12 +72,6 @@ h2 {
 #applyFilters {
   display: block;
   margin: 20px auto;
-}
-.tables {
-  /*margin-left: 12vw;
-  margin-top: 5vw;
-  margin-bottom: 2vw;
-  width: 90vw;*/
 }
 
 .cardsChart {
