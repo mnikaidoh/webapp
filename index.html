@@ -201,7 +201,7 @@
       </div>
 
       <div class="container-fluid tables">
-        <div class="row g-3" id="service"></div>
+        <div class="row g-3 justify-content-center" id="service"></div>
       </div>
       <!-- import the Bootstrap's javascript file -->
       <!--
@@ -220,8 +220,9 @@
       </section>
     --></main>
     <footer class="text-center text-white" style="background-color: #425286">
-      <div class="container p-4 pb-0">
-        <section class="mb-4">
+      <div class="footerContainer p-4 pb-0">
+        <section class="mb-2">
+          <!-- reduced margin-bottom -->
           <a
             class="btn btn-outline-light btn-floating m-1"
             href="https://github.com/mnikaidoh"
@@ -230,11 +231,15 @@
             ><i class="bi bi-github"></i
           ></a>
         </section>
-        <div class="text-center p-3">
-          <p class="smallText">created by Mia Nikaidoh</p>
+        <div class="text-center" style="padding-top: 0">
+          <!-- removed extra padding -->
+          <p class="smallText" style="margin: 0; line-height: 1.2">
+            created by Mia
+          </p>
         </div>
       </div>
     </footer>
+
     <script src="script.js"></script>
   </body>
 </html>

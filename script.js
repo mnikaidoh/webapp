@@ -109,54 +109,43 @@ async function getOneRecord(id) {
       const map = data.fields["map"] || "#";
 
       const newHtml = `
-        <div class="container">
-          <div class="row g-0">
+        <div class="container mt-4 getOneRecordContainer">
+          <div class="row border rounded p-3">
+            <!-- Top Row -->
             ${
               image
-                ? `<div class="col-md-4"><img src="${image}" class="img-fluid rounded-start" alt="${name}"></div>`
+                ? `<div class="col-md-4 mb-3 mb-md-0"><img src="${image}" class="img-fluid rounded" alt="${name}"></div>`
                 : ""
             }
             <div class="col-md-8">
-              <div class="card-body">
-                <h3 class="card-title">${name}</h3>
-                <p class="card-text">${description}</p>
-                <p class="card-text"><strong>Services Offered:</strong> ${servicesOffered}</p>
-                <p><strong>Address:</strong> ${address}</p>
-              </div>
+              <h3>${name}</h3>
+              <p>${description}</p>
+              <p><strong>Services Offered:</strong> ${servicesOffered}</p>
+              <p><strong>Address:</strong> ${address}</p>
+            </div>
+
+            <!-- Bottom Row -->
+            <div class="col-md-6 mt-3">
+              <h4>Details</h4>
+              <p><strong>Hours:</strong> ${hours}</p>
+              <p><strong>Age Groups Served:</strong> ${ages}</p>
+            </div>
+            <div class="col-md-6 mt-3">
+              <h4>Contact & Link</h4>
+              <p><strong>Phone:</strong> ${phone}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              ${
+                website
+                  ? `<a href="${website}" target="_blank" class="btn btn-primary btn-sm">Website</a>`
+                  : ""
+              }
             </div>
           </div>
-        </div>
-        
-        <div class="container">
-          <div class="row g-0">
 
-            <div class="container">
-              <div class="card-body">
-                <h4>Details</h4>
-                <p><strong>Hours:</strong> ${hours}</p>
-                <p><strong>Age Groups Served:</strong> ${ages}</p>
-              </div>
-            </div>
-            <div class="container">
-              <div class="card-body">
-                <h4>Contact & Link</h4>
-                <p><strong>Phone:</strong> ${phone}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                ${
-                  website
-                    ? `<a href="${website}" target="_blank" class="btn btn-primary btn-sm">Website</a>`
-                    : ""
-                }
-              </div>
-
-            </div>
-
+          <!-- Centered Back Button -->
+          <div class="d-flex justify-content-center my-4">
+            <button class="btn btn-secondary btn-lg w-50" onclick="getAllRecords()">Back to List</button>
           </div>
-        </div>
-
-
-        <div class="container">
-          <button class="btn btn-secondary" onclick="getAllRecords()">Back to List</button>
         </div>
       `;
 
